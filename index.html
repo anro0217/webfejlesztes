@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang=en>
+
+<head>
+    <meta charset=utf-8>
+    <title>RPC the Game</title>
+    <style type="text/css" media="all">
+        html {
+            font-size: .5vw;
+        }
+        body {
+            background: #2a2929;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            font-size: 6rem;
+            margin: 0;
+            padding: 0;
+        }
+        h2 {
+            text-align: left;
+            font-size: 4rem;
+            margin: 0;
+            padding: 0;
+        }
+        main {
+            text-align: center;
+        }
+        footer {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			text-align: center;
+		  }
+        a {
+            color: #fff;
+        }
+        a.none {
+            text-decoration: none;
+        }
+        a.ul:hover {
+            text-decoration: underline;
+        }
+        img {
+            width: 50rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Rock Paper Scissors the Game</h1>
+    <h2>Wins: <span id="Wins">0</span></h2>
+    <h2>Loss: <span id="Loss">0</span></h2>
+    <main>
+        <img src="rock.jpg" onclick="play('rock')">
+        <img src="paper.jpg" onclick="play('paper')">
+        <img src="scissor.jpg" onclick="play('scissors')">
+    </main>
+    <footer>
+        <h3>2023 March <a href="" class="none ul">Created by: Roland Antal</a><br />
+    </footer>
+    
+    <script>
+        let wins = 0;
+        let loss = 0;
+        let isShowingMessage = false;
+        
+        function play(userChoice) {
+                if(isShowingMessage == false)
+                {
+                    let choices = ['rock', 'paper', 'scissors'];
+                    let computerChoice = choices[Math.floor(Math.random() * choices.length)];
+                    
+                    switch(userChoice + computerChoice) {
+                        case 'rockscissors':
+                        case 'paperrock':
+                        case 'scissorspaper':
+                            win(userChoice, computerChoice);
+                            break;
+                        case 'rockpaper':
+                        case 'paperscissors':
+                        case 'scissorsrock':
+                            lose(userChoice, computerChoice);
+                            break;
+                        case 'rockrock':
+                        case 'paperpaper':
+                        case 'scissorsscissors':
+                            tie(userChoice, computerChoice);
+                            break;
+                }
+            }
+        }
+        
+        function win(user, computer) {
+            wins++;
+            document.getElementById('Wins').innerHTML = wins;
+            showMessage(`You chose ${user}, and the computer chose ${computer}. You win!`, 'green');
+        }
+        
+        function lose(user, computer) {
+            loss++;
+            document.getElementById('Loss').innerHTML = loss;
+            showMessage(`You chose ${user}, and the computer chose ${computer}. You lose!`, 'red');
+        }
+        
+        function tie(user, computer) {
+            showMessage(`You chose ${user}, and the computer chose ${computer}. It's a tie!`, 'black');
+        }
+        function showMessage(message, color) {
+            isShowingMessage = true;
+            const messageElement = document.createElement('p');
+            messageElement.innerText = message;
+            messageElement.style.color = color;
+            messageElement.style.textAlign = 'center';
+            messageElement.style.fontSize = '30px'; 
+            document.body.appendChild(messageElement);
+
+            setTimeout(() => {
+                document.body.removeChild(messageElement);
+                isShowingMessage = false;
+                scoreElement.style.color = 'black';
+                scoreElement.style.fontWeight = 'normal';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
