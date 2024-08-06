@@ -1,4 +1,4 @@
-#Rock paper scissors
+Rock paper scissors
 ------------------------
 A jól ismert kő papír olló nevezetű játékot megvalósító kód.
 Kipróbálható az alábbi linken: 
